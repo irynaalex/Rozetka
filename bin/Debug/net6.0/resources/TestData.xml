@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Filters>
+	<FiltersList>
+		<Filter>
+			<searchProduct>Ноутбуки</searchProduct>
+				<searchFirm>HP</searchFirm>
+			<orderSum>50000</orderSum>
+		</Filter>
+		<Filter>
+			<searchProduct>Телефони</searchProduct>
+			<searchFirm>Samsung</searchFirm>
+			<orderSum>1000</orderSum>
+		</Filter>
+		<Filter>
+			<searchProduct>Монітори</searchProduct>
+			<searchFirm>AOC</searchFirm>
+			<orderSum>10000</orderSum>
+		</Filter>
+		<Filter>
+			<searchProduct>Планшети</searchProduct>
+			<searchFirm>Asus</searchFirm>
+			<orderSum>1000</orderSum>
+		</Filter>
+		<Filter>
+			<searchProduct>Телефізори</searchProduct>
+			<searchFirm>Akai</searchFirm>
+			<orderSum>30000</orderSum>
+		</Filter>
+	</FiltersList>
+</Filters>
