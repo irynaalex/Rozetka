@@ -2,16 +2,15 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using PageObject;
 using Task4RozetkaUA.Models;
-
+[assembly: LevelOfParallelism(3)]
 namespace Tests
 {
     [TestFixture]
     
-    //[Parallelizable(scope: ParallelScope.All)]
-    [Parallelizable]
-    public class ProductSearchTest: BaseTest
+    [Parallelizable(scope: ParallelScope.All)]
+     public class ProductSearchTest: BaseTest
     {
-        //[assembly: LevelOfParallelism(3)]
+        
         [TestCaseSource (nameof(GetTestDataFromXml))]
         public void Test1(Filter data)
         {
