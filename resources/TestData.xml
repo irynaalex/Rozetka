@@ -9,12 +9,12 @@
 		<Filter>
 			<searchProduct>Телефони</searchProduct>
 			<searchFirm>Samsung</searchFirm>
-			<orderSum>1000</orderSum>
+			<orderSum>5000</orderSum>
 		</Filter>
 		<Filter>
 			<searchProduct>Монітори</searchProduct>
 			<searchFirm>AOC</searchFirm>
-			<orderSum>10000</orderSum>
+			<orderSum>1000</orderSum>
 		</Filter>
 		<Filter>
 			<searchProduct>Планшети</searchProduct>
@@ -24,7 +24,7 @@
 		<Filter>
 			<searchProduct>Телефізори</searchProduct>
 			<searchFirm>Akai</searchFirm>
-			<orderSum>30000</orderSum>
+			<orderSum>1000</orderSum>
 		</Filter>
 	</FiltersList>
 </Filters>
