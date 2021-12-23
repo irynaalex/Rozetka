@@ -1,4 +1,4 @@
-﻿using OpenQA.Selenium;
+using OpenQA.Selenium;
 
 namespace PageObject
 {
@@ -11,3 +11,4 @@ namespace PageObject
         public string textSumProductsInCart() => WaitAndFindElement(_textSumProductsInCart).Text;
     }
 }
+
