@@ -1,51 +1,89 @@
-﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using System;
-using System.Collections.Generic;
 using System.Threading;
-using Task4RozetkaUA.Models;
 
-
-namespace Tests
-{
-    [Parallelizable]
-    public class BaseTest
+namespace PageObject    
+{    
+    public class BasePage
     {
-        public static IEnumerable<Filter> GetTestDataFromXml()
+        private const int TimeWait = 3000;
+        protected readonly IWebDriver _driver;
+        public BasePage(IWebDriver webDriver)
         {
-            Filters filters = FilterReader.ReadFiltersFromXML();
-            for (int i = 0; i < filters.FiltersList.Count; i++)
+            _driver = webDriver;
+        }
+
+        public static bool Elexists(By by, IWebDriver _driver)
+        {
+            try
             {
-                yield return filters.FiltersList[i];
+                _driver.FindElement(by);
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
             }
         }
-              
-        private static readonly ThreadLocal<IWebDriver> DriverThreadlocal = new();
-        public static IWebDriver _driver
+        public static void Waitforelement(IWebDriver _driver, By by)
         {
-            get
+            for (int i = 0; i < 30; i++)
             {
-                if (!DriverThreadlocal.IsValueCreated)
+                Thread.Sleep(1000);
+                if (Elexists(by, _driver))
                 {
-                    throw new ArgumentException("Driver is not initialized!");
+                    break;
                 }
-                return DriverThreadlocal.Value;
             }
         }
 
-        [SetUp]
-        public void Setup()
+        public void WaitToBeClickable(By by)
         {
-             DriverThreadlocal.Value = new ChromeDriver();
-            _driver.Navigate().GoToUrl("https://rozetka.com.ua");
-            _driver.Manage().Window.Maximize();
+            var webDriverWait = new WebDriverWait(_driver, TimeSpan.FromSeconds(TimeWait));
+            webDriverWait.Until(ExpectedConditions.ElementToBeClickable(by));
         }
-                
-        [TearDown]
-        public void TearDown()
+        public  IWebElement WaitAndFindElement(By by)
         {
-            _driver.Quit();
+            var webDriverWait = new WebDriverWait(_driver, TimeSpan.FromSeconds(TimeWait));
+            return webDriverWait.Until(ExpectedConditions.ElementExists(by));
+        }
+    }
+
+    public static class WebDriverExtensions
+    {
+        public static IWebElement FindElement(this IWebDriver driver, By by, int timeoutInSeconds)
+        {
+            if (timeoutInSeconds > 0)
+            {
+                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
+                return wait.Until(drv => drv.FindElement(by));
+            }
+            return driver.FindElement(by);
+        }
+
+    }
+    public static class MyAssert
+    {
+        public static bool MyIsTrue(string first, string second)
+        {
+            string numericString = "";
+            foreach (char c in second)
+            {
+                if ((c >= '0' && c <= '9') || c == ' ' || c == '-')
+                {
+                    numericString = String.Concat(numericString, c);
+                }
+                else
+                    break;
+            }
+            if (Convert.ToInt32(first) < Convert.ToInt32(numericString))
+            {
+                return true;
+            }
+            else
+                return false;
         }
     }
 }
