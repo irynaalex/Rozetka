@@ -1,13 +1,17 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
+using OpenQA.Selenium;
 using PageObject;
 using Task4RozetkaUA.Models;
 
 namespace Tests
 {
-    [Parallelizable(scope: ParallelScope.All)]
+    [TestFixture]
+    
+    //[Parallelizable(scope: ParallelScope.All)]
+    [Parallelizable]
     public class ProductSearchTest: BaseTest
     {
-        
+        //[assembly: LevelOfParallelism(3)]
         [TestCaseSource (nameof(GetTestDataFromXml))]
         public void Test1(Filter data)
         {
@@ -21,6 +25,8 @@ namespace Tests
             searchPage.searchLineTextClick();
         
             ProductPage productPage = new(_driver);
+            IJavaScriptExecutor js = ((IJavaScriptExecutor)_driver);
+            js.ExecuteScript("window.scrollTo(0, -document.body.scrollHeight);");
             productPage.buttonChoiceByPric();
             productPage.buttonChoiceByPriceExpensive();            
             productPage.waitButtonIconAddProductBay();
